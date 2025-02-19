@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Ansible Deploy') {
+            steps {
+                sh 'ansible-playbook ansible/nginx_playbook.yml -i ansible/inventory.ini'
+            }
+        }
+
+        stage('Terraform Provision') {
+            steps {
+                sh 'terraform init && terraform apply -auto-approve'
+            }
+        }
+
+        stage('Docker Build and Push') {
+            steps {
+                sh 'docker build -t my-node-app .'
+                sh 'docker tag my-node-app registry/my-node-app:latest'
+                sh 'docker push registry/my-node-app:latest'
+            }
+        }
+
+        stage('Kubernetes Deploy') {
+            steps {
+                sh 'kubectl apply -f kubernetes/deployment.yml'
+            }
+        }
+    }
+}
