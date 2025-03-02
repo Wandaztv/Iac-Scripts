@@ -2,9 +2,9 @@
 
 # Server Details (Hostname, IP, Username, Password)
 declare -A servers=(
-  ["stapp01"]="tony password"
-  ["stapp02"]="steve password"
-  ["stapp03"]="banner password"
+  ["stapp01"]="tony password1"
+  ["stapp02"]="steve password2"
+  ["stapp03"]="banner password3"
 )
 
 # Loop through each server
