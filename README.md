@@ -14,7 +14,7 @@ This repository contains DevOps scripts for managing infrastructure using popula
 - **Terraform**: For provisioning AWS EC2 instances
 - **Docker**: For containerizing a simple Node.js application
 - **Kubernetes**: For deploying and managing the Node.js app on a Kubernetes cluster
-
+- **Python** for all the fun things
 ## Getting Started
 
 1. Clone the repository:
