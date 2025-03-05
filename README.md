@@ -20,7 +20,7 @@ This repository contains DevOps scripts for managing infrastructure using popula
 1. Clone the repository:
     ```bash
     git clone https://github.com/Wandaztv/Iac-scripts.git
-    cd your-repository
+    cd Iac-scripts
     ```
 
 2. Choose the appropriate tool/script to use:
