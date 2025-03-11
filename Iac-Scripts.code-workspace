@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Nodejs app",
+			"path": "../Azure-nodejs/Nodejs app"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ssl-cert-renewal
+spec:
+  schedule: "0 0 1 * *"  # Runs on the 1st day of every month at midnight (adjust as necessary)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: certbot
+            image: certbot/certbot:latest  # Certbot Docker image
+            args:
+              - "/bin/sh"
+              - "-c"
+              - "certbot renew --quiet --deploy-hook '/etc/cron.d/reload-nginx.sh'"
+            volumeMounts:
+            - name: ssl-certs
+              mountPath: /etc/letsencrypt  # Mount SSL certificates volume
+            - name: nginx-config
+              mountPath: /etc/cron.d  # Mount the reload hook script
+          restartPolicy: OnFailure  # Only restart if the job fails
+          volumes:
+            - name: ssl-certs
+              persistentVolumeClaim:
+                claimName: ssl-cert-pvc
+            - name: nginx-config
+              configMap:
+                name: nginx-reload-hook
